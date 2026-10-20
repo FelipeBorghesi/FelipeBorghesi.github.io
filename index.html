@@ -359,6 +359,101 @@ h3 small { display: block; font: 500 .85rem var(--mono); color: var(--accent); m
 .contact .val.plain { font: 400 .92rem var(--sans); user-select: text; }
 @media (max-width: 600px) { .edu { grid-template-columns: 1fr; gap: 4px; } .edu-label { text-align: left; } .edu > div { padding-left: 0; } }
 
+/* tour do fluxo */
+.tour-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 1px solid var(--line); }
+.tour-label { font: 500 .72rem var(--mono); color: var(--muted); letter-spacing: .04em; }
+.tour-nav { display: flex; align-items: center; gap: 8px; }
+.tour-nav button { width: 32px; height: 28px; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--fg); font: 500 .85rem var(--mono); cursor: pointer; }
+.tour-nav button:hover { border-color: var(--accent); color: var(--accent); }
+.tour-count { font: 500 .75rem var(--mono); color: var(--fg); min-width: 3.6em; text-align: center; font-variant-numeric: tabular-nums; }
+.tour .shot-btn img { aspect-ratio: 1440 / 900; object-fit: cover; }
+.tour-cap { display: grid; gap: 4px; padding: 14px 16px !important; font: 400 .92rem/1.55 var(--sans) !important; color: var(--muted) !important; }
+.tour-cap b { font: 600 1.02rem var(--sans); color: var(--fg); }
+.tour-role { font: 500 .7rem var(--mono); color: var(--kw); text-transform: uppercase; letter-spacing: .1em; }
+.tour-steps { display: flex; gap: 6px; padding: 0 16px 14px; flex-wrap: wrap; }
+.tour-steps button { flex: 1 1 0; min-width: 22px; height: 26px; padding: 0; border: 1px solid var(--line); border-radius: 3px; background: transparent; color: var(--muted); font: 500 .68rem var(--mono); cursor: pointer; }
+.tour-steps button:hover { border-color: var(--accent); color: var(--fg); }
+.tour-steps button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.tour-steps button.done { color: var(--ok); border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+
+/* demo clicável do reembolso (tema próprio do app, claro) */
+.demo { --d-bg: #f8f6f1; --d-card: #ffffff; --d-line: #e6e3da; --d-soft: #f0ede5; --d-ink: #0d0902; --d-mut: #57534a; --d-y: #ffcd00; --d-y2: #fff4c2; --d-dark: #0d0902; }
+.demo-bar { background: var(--d-dark); color: #fff; padding: 12px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.demo-title { display: flex; flex-direction: column; gap: 2px; margin-right: 6px; }
+.demo-title b { font: 700 .9rem var(--sans); }
+.demo-title span { font-size: .72rem; color: #b5b1a6; }
+.demo-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1 1 420px; }
+.demo-chip { display: flex; align-items: center; gap: 8px; padding: 5px 12px 5px 5px; border-radius: 999px; border: 1px solid rgba(255,255,255,.16); background: transparent; color: #d6d3ca; font: 600 .74rem var(--sans); cursor: pointer; min-height: 38px; text-align: left; }
+.demo-chip:hover { background: rgba(255,255,255,.08); }
+.demo-chip i { width: 26px; height: 26px; border-radius: 999px; display: grid; place-items: center; font: 800 .72rem var(--sans); font-style: normal; flex: none; background: rgba(255,255,255,.12); color: #fff; }
+.demo-chip small { display: block; font-size: .66rem; font-weight: 500; opacity: .75; }
+.demo-chip.on { background: var(--d-y); border-color: var(--d-y); color: var(--d-ink); }
+.demo-chip.on i { background: var(--d-dark); color: var(--d-y); }
+.demo-chip.done { color: #fff; }
+.demo-chip.done i { background: #166534; }
+.demo-restart { border: 1px solid rgba(255,255,255,.16); background: transparent; color: #d6d3ca; font: 600 .74rem var(--sans); border-radius: 999px; padding: 0 14px; min-height: 38px; cursor: pointer; }
+.demo-restart:hover { background: rgba(255,255,255,.08); }
+.demo-banner { background: #fff4c2; color: var(--d-ink); border-bottom: 1px solid #ffe889; padding: 9px 16px; font-size: .84rem; }
+.demo-body { display: flex; background: var(--d-bg); color: var(--d-ink); min-height: 470px; position: relative; font-family: var(--sans); }
+.demo-side { flex: 0 0 190px; background: #fff; border-right: 1px solid var(--d-line); padding: 16px 10px; display: flex; flex-direction: column; gap: 3px; }
+.demo-brand { display: flex; align-items: center; gap: 9px; padding: 2px 8px 14px; }
+.demo-brand i { width: 30px; height: 30px; border-radius: 8px; background: var(--d-y); display: grid; place-items: center; font: 800 .72rem var(--sans); font-style: normal; }
+.demo-brand b { font: 700 .8rem var(--sans); display: block; }
+.demo-brand span { font-size: .7rem; color: var(--d-mut); }
+.demo-menu { display: flex; justify-content: space-between; align-items: center; min-height: 36px; padding: 0 10px; border-radius: 8px; font-size: .82rem; color: var(--d-mut); }
+.demo-menu.on { background: var(--d-y2); color: var(--d-ink); font-weight: 700; }
+.demo-menu em { min-width: 18px; height: 18px; border-radius: 999px; background: var(--d-ink); color: #fff; font-size: .66rem; font-weight: 700; font-style: normal; display: grid; place-items: center; padding: 0 5px; }
+.demo-user { margin-top: auto; display: flex; align-items: center; gap: 9px; padding: 14px 8px 0; font-size: .8rem; }
+.demo-user b { display: block; }
+.demo-user span { font-size: .7rem; color: var(--d-mut); }
+.demo-av { width: 32px; height: 32px; border-radius: 999px; display: grid; place-items: center; font-weight: 700; font-size: .72rem; flex: none; }
+.demo-main { flex: 1 1 auto; min-width: 0; padding: 20px 22px 28px; display: flex; flex-direction: column; gap: 16px; }
+.demo-main h5 { margin: 0; font: 700 1.35rem var(--sans); letter-spacing: -.01em; color: var(--d-ink); }
+.demo-main h6 { margin: 0; font: 700 1.15rem var(--sans); color: var(--d-ink); }
+.demo-main p { margin: 0; }
+.d-mut { color: var(--d-mut); }
+.d-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.d-card { background: var(--d-card); border: 1px solid var(--d-line); border-radius: 12px; }
+.d-stat { padding: 14px; flex: 1 1 150px; }
+.d-stat b { display: block; font: 700 1.3rem var(--sans); margin-top: 4px; }
+.d-list > div { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding: 11px 16px; border-top: 1px solid var(--d-soft); font-size: .84rem; }
+.d-list > .d-head { border-top: 0; font-weight: 700; justify-content: space-between; }
+.d-amt { font-weight: 700; margin-left: auto; }
+.d-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px; font: 600 .7rem var(--sans); white-space: nowrap; }
+.t-ok { background: #dcfce7; color: #166534; } .t-wait { background: #fef3c7; color: #92400e; } .t-blue { background: #dbeafe; color: #1e40af; } .t-soft { background: #f3f1ea; color: var(--d-mut); }
+.d-btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 0 16px; border-radius: 10px; font: 600 .82rem var(--sans); cursor: pointer; border: 1px solid var(--d-line); background: #fff; color: var(--d-ink); }
+.d-btn:hover { background: #f3f1ea; }
+.d-btn.y { background: var(--d-y); border-color: var(--d-y); }
+.d-btn.y:hover { background: #ffdb4d; }
+.d-btn.red { color: #9f1239; border-color: #fecdd3; }
+.d-field { display: flex; flex-direction: column; gap: 5px; font-size: .75rem; font-weight: 600; color: var(--d-mut); }
+.d-field div { font: 500 .84rem var(--sans); color: var(--d-ink); border: 1px solid var(--d-line); border-radius: 10px; padding: 9px 11px; background: #fff; }
+.d-receipt { width: 32px; height: 40px; border-radius: 5px; background: repeating-linear-gradient(#fff 0 4px, #ece9e0 4px 5px); border: 1px solid var(--d-line); flex: none; position: relative; overflow: hidden; }
+.d-receipt.scan { background: var(--d-dark); }
+.d-receipt.scan::after { content: ""; position: absolute; left: 8%; right: 8%; height: 3px; border-radius: 3px; background: var(--d-y); box-shadow: 0 0 10px var(--d-y); animation: dscan 1.2s ease-in-out infinite; }
+@keyframes dscan { 0%,100% { top: 8%; } 50% { top: 84%; } }
+.d-check { display: flex; gap: 9px; font-size: .82rem; align-items: flex-start; }
+.d-check i { width: 18px; height: 18px; border-radius: 999px; display: grid; place-items: center; font-size: .66rem; font-weight: 800; font-style: normal; flex: none; }
+.d-note { font-size: .78rem; background: #f3f1ea; border-radius: 10px; padding: 10px; }
+.d-table { width: 100%; border-collapse: collapse; font-size: .82rem; min-width: 560px; }
+.d-table th { text-align: left; color: var(--d-mut); font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; padding: 11px 10px; font-weight: 600; }
+.d-table td { padding: 11px 10px; border-top: 1px solid var(--d-soft); vertical-align: middle; }
+.d-tl { display: flex; gap: 10px; }
+.d-tl i { width: 11px; height: 11px; border-radius: 999px; margin-top: 4px; flex: none; }
+.d-tl div { padding-bottom: 12px; font-size: .82rem; }
+.d-tl small { display: block; color: var(--d-mut); font-size: .72rem; }
+.demo-modal { position: absolute; inset: 0; background: rgba(13,9,2,.45); display: grid; place-items: center; padding: 16px; z-index: 3; }
+.demo { position: relative; }
+.demo-modal[hidden], .demo-banner[hidden] { display: none; }
+.demo-modal .d-card { width: 100%; max-width: 400px; padding: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--d-ink); font-family: var(--sans); }
+.demo-cap { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.demo-real { background: none; border: 0; padding: 0; font: 500 .72rem var(--mono); color: var(--accent); cursor: zoom-in; }
+.demo-real:hover { text-decoration: underline; }
+.d-enter { animation: dup .25s cubic-bezier(.2,.8,.2,1); }
+@keyframes dup { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .d-enter, .d-receipt.scan::after { animation: none; } }
+@media (max-width: 760px) { .demo-side { display: none; } .demo-main { padding: 16px 14px 22px; } }
+
 /* stack */
 .skills { display: grid; gap: 0; font: 400 .9rem var(--mono); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
 .skills > div { display: grid; grid-template-columns: 11em 1fr; gap: 16px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
@@ -482,10 +577,22 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
           <div data-en="&lt;span class=&quot;n&quot;&gt;05&lt;/span&gt;&lt;b&gt;ERP&lt;/b&gt;&lt;small&gt;Grouped posting&lt;/small&gt;"><span class="n">05</span><b>ERP</b><small>Lançamento agrupado</small></div>
           <div data-en="&lt;span class=&quot;n&quot;&gt;06&lt;/span&gt;&lt;b&gt;Payment&lt;/b&gt;&lt;small&gt;Employee confirms&lt;/small&gt;"><span class="n">06</span><b>Pagamento</b><small>Funcionário confirma</small></div>
         </div>
-        <figure class="shot">
-          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <button class="shot-btn" type="button" data-zoom="img/reembolso.png" aria-label="Ampliar: Tela inicial do hub de reembolsos com resumo do mês e solicitações" data-en-aria-label="Enlarge: reimbursement hub home screen with monthly summary and requests"><img src="img/reembolso.png" alt="Tela inicial do hub de reembolsos com resumo do mês e solicitações" data-en-alt="Reimbursement hub home screen with monthly summary and requests" loading="lazy" width="1875" height="740"></button>
-          <figcaption data-en="Employee home screen, with demo data.">Tela inicial do funcionário, com dados de demonstração.</figcaption>
+        <figure class="shot demo" id="demo">
+          <div class="demo-bar">
+            <div class="demo-title"><b id="demo-t1">Demonstração · Hub de Reembolsos</b><span id="demo-t2">Dados fictícios · clique nos botões amarelos para seguir o fluxo</span></div>
+            <div class="demo-chips" id="demo-chips"></div>
+            <button type="button" class="demo-restart" data-act="restart" id="demo-restart">Recomeçar</button>
+          </div>
+          <div class="demo-banner" id="demo-banner" hidden></div>
+          <div class="demo-body">
+            <aside class="demo-side" id="demo-side"></aside>
+            <div class="demo-main" id="demo-main" aria-live="polite"></div>
+          </div>
+          <div class="demo-modal" id="demo-modal" hidden></div>
+          <figcaption class="demo-cap">
+            <span data-en="Clickable demo with fictional data. The real system runs in production.">Demo clicável com dados fictícios. O sistema real roda em produção.</span>
+            <button type="button" class="demo-real" data-zoom="img/reembolso.png" aria-label="Ver a tela real do sistema" data-en-aria-label="See the real system screen"><span data-en="see the real screen ↗">ver a tela real ↗</span></button>
+          </figcaption>
         </figure>
         <ul class="changes">
           <li data-en="&lt;span&gt;&lt;strong&gt;Receipt reading with OCR and AI&lt;/strong&gt;, with duplicate receipt detection.&lt;/span&gt;"><span><strong>Leitura de comprovantes com OCR e IA</strong>, com detecção de comprovante duplicado.</span></li>
@@ -533,10 +640,22 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         <ol class="flow" aria-label="Etapas da despesa" data-en-aria-label="Expense stages">
           <li data-en="received">recebimento</li><li data-en="review">conferência</li><li data-en="approval">aprovação</li><li data-en="posting">lançamento</li><li data-en="payment">pagamento</li><li data-en="done">finalizada</li>
         </ol>
-        <figure class="shot">
-          <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <button class="shot-btn" type="button" data-zoom="img/despesa.png" aria-label="Ampliar: Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável" data-en-aria-label="Enlarge: expense entry with auto-fill from XML, PDF or bank slip barcode"><img src="img/despesa.png" alt="Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável" data-en-alt="Expense entry with auto-fill from XML, PDF or bank slip barcode" loading="lazy" width="1875" height="925"></button>
-          <figcaption data-en="Expense entry: drop the XML or PDF and the fields fill themselves.">Cadastro de despesa: arraste o XML ou o PDF e os campos se preenchem.</figcaption>
+        <figure class="shot tour" id="tour" aria-roledescription="carrossel" aria-label="Tour pelo sistema de contas a pagar" data-en-aria-label="Accounts payable system tour">
+          <div class="tour-bar">
+            <span class="tour-label" data-en="System tour · 11 steps">Tour pelo sistema · 11 etapas</span>
+            <div class="tour-nav">
+              <button type="button" id="tour-prev" aria-label="Etapa anterior" data-en-aria-label="Previous step">←</button>
+              <span class="tour-count" id="tour-count" aria-live="polite">1 / 11</span>
+              <button type="button" id="tour-next" aria-label="Próxima etapa" data-en-aria-label="Next step">→</button>
+            </div>
+          </div>
+          <button class="shot-btn" type="button" id="tour-zoom" data-zoom="img/fluxo-01.png" aria-label="Ampliar a tela desta etapa" data-en-aria-label="Enlarge this step's screen"><img id="tour-img" src="img/fluxo-01.png" alt="" width="1440" height="900"></button>
+          <figcaption class="tour-cap">
+            <span class="tour-role" id="tour-role">Recebimento</span>
+            <b id="tour-title">O dia começa pelo painel</b>
+            <span id="tour-text">Cada perfil vê a própria fila, o que está vencido e o que vence em breve.</span>
+          </figcaption>
+          <div class="tour-steps" id="tour-steps" role="tablist" aria-label="Etapas" data-en-aria-label="Steps"></div>
         </figure>
         <ul class="changes">
           <li data-en="&lt;span&gt;&lt;strong&gt;Automatic reading of e-invoices (NF-e) and bank slips&lt;/strong&gt;: supplier, amount, installments and due date filled from the XML, the PDF or the slip barcode.&lt;/span&gt;"><span><strong>Leitura automática de NF-e e boletos</strong>: fornecedor, valor, parcelas e vencimento preenchidos a partir do XML, do PDF ou da linha digitável.</span></li>
@@ -934,7 +1053,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   }
   if (!reduce) setTimeout(blink, 2000);
 
-  var LINES = [
+  var LINES_PT = [
     "SELECT * FROM cafe WHERE quente = 'S';",
     "Achei um FULL TABLE SCAN. Já volto.",
     "Deploy na sexta? Melhor não.",
@@ -958,7 +1077,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     "Monster first, deploy later.",
     "This legacy code is older than my keyboard."
   ];
-  function L() { return window.__lang === 'en' ? LINES_EN : LINES; }
+  function L() { return window.__lang === 'en' ? LINES_EN : LINES_PT; }
   var bubble = document.getElementById('bubble');
   var idx = -1, talkTimer = null;
   document.getElementById('avatar').addEventListener('click', function () {
@@ -1044,6 +1163,278 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   window.addEventListener('langchange', update);
   update();
 })();
+/* ---------- tour do fluxo de contas a pagar ---------- */
+(function () {
+  var STEPS = [
+    ['Recebimento','Receiving','O dia começa pelo painel','The day starts at the dashboard','Cada perfil vê a própria fila, o que está vencido e o que vence em breve.','Each role sees its own queue, what is overdue and what is due soon.'],
+    ['Recebimento','Receiving','O boleto preenche o cadastro sozinho','The bank slip fills in the form','Ao anexar o PDF, o sistema lê a linha digitável, o valor e o vencimento, e reconhece o fornecedor pelo CNPJ.','Attach the PDF and the system reads the barcode line, amount and due date, and recognizes the supplier by tax ID.'],
+    ['Recebimento','Receiving','Rateio entre filiais e classificação automática','Split across branches, classified automatically','O custo é dividido entre filiais e a soma precisa bater com o total. Centro de custo e conta contábil vêm das regras.','The cost is split across branches and must add up to the total. Cost center and ledger account come from the rules.'],
+    ['Recebimento','Receiving','Conferência com checklist','Review with a checklist','A despesa recebe protocolo e entra na fila. O conferente marca o que checou e aprova, ou pede correção.','The expense gets a protocol number and joins the queue. The reviewer ticks what was checked and approves, or asks for a fix.'],
+    ['Gestor','Manager','O gestor recebe só o que é da área dele','Managers only see their own area','Conferida, a despesa vai sozinha para o gestor da área, que é avisado no sistema e por e-mail.','Once reviewed, the expense goes straight to the area manager, notified in the app and by email.'],
+    ['Gestor','Manager','Aprovar, reprovar ou pedir correção','Approve, reject or request a fix','A aprovação digital substitui a assinatura no protocolo e fica registrada com data e hora.','Digital approval replaces the paper signature and is logged with date and time.'],
+    ['Lançamento','Posting','Lançado no ERP, com número e responsável','Posted to the ERP, with number and owner','Quem assume lança no sistema corporativo e registra aqui o número do lançamento.','Whoever takes it posts it in the corporate system and records the posting number here.'],
+    ['Financeiro','Finance','O Financeiro planeja o caixa pela agenda','Finance plans cash flow from the schedule','Tudo o que vai vencer, dia a dia, separando o que já está liberado do que ainda está em aprovação.','Everything coming due, day by day, separating what is cleared to pay from what is still in approval.'],
+    ['Financeiro','Finance','Pagamento registrado, com comprovante','Payment recorded, with receipt','Data, valor, forma e número da transação, com comprovante anexado. Parcelas são baixadas uma a uma.','Date, amount, method and transaction number, with the receipt attached. Installments are settled one by one.'],
+    ['Qualquer perfil','Any role','Finalizada, com cada passo registrado','Done, with every step on record','O histórico mostra quem fez cada coisa e quando, e não pode ser editado.','The history shows who did what and when, and cannot be edited.'],
+    ['Gestor','Manager','Onde o processo demora, em números','Where the process slows down, in numbers','Gasto por fornecedor, área, centro de custo e filial, e o tempo médio de cada etapa, destacando o gargalo.','Spend by supplier, area, cost center and branch, plus average time per stage, highlighting the bottleneck.']
+  ];
+  var N = STEPS.length, cur = 0;
+  var img = document.getElementById('tour-img'), zoom = document.getElementById('tour-zoom');
+  var role = document.getElementById('tour-role'), title = document.getElementById('tour-title'), text = document.getElementById('tour-text');
+  var count = document.getElementById('tour-count'), wrap = document.getElementById('tour-steps');
+  var btns = [];
+  for (var i = 0; i < N; i++) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.textContent = String(i + 1);
+    (function (k) { b.addEventListener('click', function () { go(k); }); })(i);
+    wrap.appendChild(b); btns.push(b);
+  }
+  function src(k) { return 'img/fluxo-' + String(k + 1).padStart(2, '0') + '.png'; }
+  function render() {
+    var en = window.__lang === 'en', st = STEPS[cur];
+    img.src = src(cur); zoom.setAttribute('data-zoom', src(cur));
+    role.textContent = (en ? 'Step ' : 'Etapa ') + (cur + 1) + ' · ' + (en ? st[1] : st[0]);
+    title.textContent = en ? st[3] : st[2];
+    text.textContent = en ? st[5] : st[4];
+    img.alt = (en ? st[3] : st[2]);
+    count.textContent = (cur + 1) + ' / ' + N;
+    btns.forEach(function (b, k) {
+      b.setAttribute('aria-selected', k === cur ? 'true' : 'false');
+      b.setAttribute('aria-label', (en ? 'Step ' : 'Etapa ') + (k + 1) + ': ' + (en ? STEPS[k][3] : STEPS[k][2]));
+      b.classList.toggle('done', k < cur);
+    });
+  }
+  function go(k) { cur = (k + N) % N; render(); }
+  document.getElementById('tour-prev').addEventListener('click', function () { go(cur - 1); });
+  document.getElementById('tour-next').addEventListener('click', function () { go(cur + 1); });
+  document.getElementById('tour').addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { go(cur + 1); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { go(cur - 1); e.preventDefault(); }
+  });
+  var x0 = null;
+  zoom.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  zoom.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); }
+  });
+  for (var k = 1; k < N; k++) { var pre = new Image(); pre.src = src(k); }
+  window.addEventListener('langchange', render);
+  render();
+})();
+
+/* ---------- demo clicável do reembolso ---------- */
+(function () {
+  var T = {
+    pt: {
+      t1: 'Demonstração · Hub de Reembolsos', t2: 'Dados fictícios · clique nos botões amarelos para seguir o fluxo', restart: 'Recomeçar',
+      chips: [['Cria e envia','Ana · funcionária'],['Aprova','João · aprovador'],['Lança no ERP','Maria · Central Notas'],['Confirma o recebimento','Ana · funcionária']],
+      brand: 'Hub de Reembolsos', brandSub: 'demonstração',
+      people: { ana: ['Ana Souza','Funcionária · Comercial'], joao: ['João Pereira','Aprovador'], maria: ['Maria Lima','Central Notas'] },
+      menus: { ana: ['Início','Meus reembolsos','Avisos'], joao: ['Início','Aprovações','Avisos'], maria: ['Início','Central Notas','Avisos'] },
+      banners: { aprovLista: ['Ana enviou a solicitação.','O João recebeu um aviso no sininho e por e-mail. Agora você está vendo a tela dele.'], cn: ['João aprovou.','A Ana foi avisada e a solicitação entrou na fila da Central Notas. Agora você é a Maria.'], confirmar: ['Maria lançou no ERP.','A Ana recebeu o aviso: pagamento em até 15 dias úteis. De volta à tela da Ana.'] },
+      hello: 'Bom dia,', newR: 'Novo reembolso', inApproval: 'Em aprovação', toReceive: 'A receber', received: 'Recebido em 2026', last: 'Últimos reembolsos',
+      hist: [['REB-2026-0118','Treinamento — São Paulo','R$ 824,50'],['REB-2026-0087','Visita técnica — Jundiaí','R$ 412,00']], paid: 'Paga',
+      crumb: 'Meus reembolsos › Novo', reason: 'Motivo da despesa', reasonV: 'Visita ao cliente Grupo Alfa — Campinas', cc: 'Centro de custo', ccV: 'Comercial · Filial Campinas', date: 'Data da viagem',
+      receipts: 'Comprovantes', readHint: 'O sistema lê valor, data e estabelecimento da foto', fromPhoto: 'lido da foto',
+      exp: [['Posto Av. Brasil','Combustível'],['Restaurante Sabor da Terra','Alimentação'],['Pedágio Rodovia SP-348','Pedágio']],
+      reading: 'Lendo o comprovante…', readingSub: 'identificando valor, data e CNPJ', snap: 'Fotografar comprovante',
+      checksT: 'Conferência do sistema', checks: ['Todos os comprovantes têm foto legível','Datas dentro do período da viagem','Nenhum comprovante repetido','Viagem completa: ida, refeição e pedágio','Falta o comprovante do pedágio'],
+      total: 'Total', send: 'Enviar para aprovação', cantSend: 'Fotografe o comprovante do pedágio para completar a viagem.',
+      approvals: 'Aprovações', waiting: 'Aguardando você · 2', decided: 'Já decididas', th: ['Código','Funcionário','Motivo','Enviada','Valor',''],
+      r1: ['Visita ao cliente Grupo Alfa','hoje, 09:12'], r2: ['Carlos Mendes','Estacionamento — evento','ontem, 17:40'], area: 'Comercial · Campinas', review: 'Analisar',
+      awaiting: 'Aguardando aprovação', sub: 'Ana Souza · Visita ao cliente Grupo Alfa — Campinas · 14/10/2026', decision: 'Sua decisão', comment: 'Comentário (opcional)', commentV: 'Tudo certo, obrigado!',
+      approve: 'Aprovar', fix: 'Pedir correção', reject: 'Reprovar',
+      fixNote: 'Pedir correção devolve a solicitação para a Ana com o seu comentário. Ela ajusta e reenvia. Nesta demonstração seguimos pela aprovação.',
+      rejNote: 'Reprovar encerra a solicitação, e o motivo é obrigatório. A Ana é avisada. Nesta demonstração seguimos pela aprovação.',
+      cn: 'Central Notas', toPost: 'A lançar · 1 pessoa', posted: 'Lançados no ERP', person: 'Ana Souza · Filial Campinas', personSub: '1 solicitação aprovada (REB-2026-0142) · aprovada por João Pereira hoje', pix: 'Pagamento: Pix (CPF ***.456.789-**)', post: 'Lançar no ERP',
+      group: 'As solicitações aprovadas são agrupadas por pessoa e filial: um lançamento no ERP para cada uma.',
+      mTitle: 'Lançar no ERP', mSub: 'Ana Souza · Filial Campinas · 1 solicitação', mNum: 'Número do lançamento no ERP', mHelp: 'Após o lançamento o funcionário é avisado e, quando o pagamento cair, ele mesmo confirma o recebimento no sistema.', cancel: 'Cancelar', confirm: 'Confirmar lançamento',
+      postedTag: 'Lançada no ERP · aguardando pagamento', q: 'O pagamento já caiu na sua conta?', qText: 'Lançamento NF-884213 de {t}, feito em 20/10/2026. O pagamento é feito em até 15 dias úteis. Um novo reembolso só pode ser aberto depois que você confirmar.',
+      yes: 'Sim, recebi', notYet: 'Ainda não recebi', notYetNote: '“Ainda não recebi” avisa a Central Notas e os administradores para verificarem o pagamento. Nesta demonstração seguimos com o recebimento confirmado.',
+      history: 'Histórico', tl: [['Criada e enviada por Ana Souza','20/10 · 09:12 · 3 comprovantes'],['Aprovada por João Pereira','20/10 · 10:05 · “Tudo certo, obrigado!”'],['Lançada no ERP por Maria Lima','20/10 · 14:30 · NF-884213'],['Aguardando você confirmar o recebimento','prazo: até 15 dias úteis']],
+      done: 'Reembolso concluído', doneText: 'A Ana confirmou o recebimento e a solicitação foi encerrada. A partir de agora ela já pode abrir um novo reembolso.',
+      roles: [['Ana','criou e confirmou'],['João','aprovou'],['Maria','lançou no ERP'],['Financeiro','pagou']], again: 'Ver de novo'
+    },
+    en: {
+      t1: 'Demo · Reimbursement Hub', t2: 'Fictional data · click the yellow buttons to follow the flow', restart: 'Restart',
+      chips: [['Creates & sends','Ana · employee'],['Approves','João · approver'],['Posts to ERP','Maria · invoice desk'],['Confirms receipt','Ana · employee']],
+      brand: 'Reimbursement Hub', brandSub: 'demo',
+      people: { ana: ['Ana Souza','Employee · Sales'], joao: ['João Pereira','Approver'], maria: ['Maria Lima','Invoice desk'] },
+      menus: { ana: ['Home','My reimbursements','Alerts'], joao: ['Home','Approvals','Alerts'], maria: ['Home','Invoice desk','Alerts'] },
+      banners: { aprovLista: ['Ana sent the request.','João got a notification in the app and by email. You are now seeing his screen.'], cn: ['João approved.','Ana was notified and the request joined the invoice desk queue. You are now Maria.'], confirmar: ['Maria posted it to the ERP.','Ana was told payment arrives within 15 business days. Back to Ana’s screen.'] },
+      hello: 'Good morning,', newR: 'New reimbursement', inApproval: 'In approval', toReceive: 'To receive', received: 'Received in 2026', last: 'Recent reimbursements',
+      hist: [['REB-2026-0118','Training — São Paulo','R$ 824.50'],['REB-2026-0087','Technical visit — Jundiaí','R$ 412.00']], paid: 'Paid',
+      crumb: 'My reimbursements › New', reason: 'Expense reason', reasonV: 'Client visit, Grupo Alfa — Campinas', cc: 'Cost center', ccV: 'Sales · Campinas branch', date: 'Trip date',
+      receipts: 'Receipts', readHint: 'The system reads amount, date and merchant from the photo', fromPhoto: 'read from photo',
+      exp: [['Av. Brasil gas station','Fuel'],['Sabor da Terra restaurant','Meals'],['SP-348 highway toll','Toll']],
+      reading: 'Reading the receipt…', readingSub: 'finding amount, date and tax ID', snap: 'Snap receipt',
+      checksT: 'System checks', checks: ['Every receipt has a readable photo','Dates within the trip period','No duplicate receipts','Complete trip: travel, meal and toll','Toll receipt missing'],
+      total: 'Total', send: 'Send for approval', cantSend: 'Snap the toll receipt to complete the trip.',
+      approvals: 'Approvals', waiting: 'Waiting on you · 2', decided: 'Decided', th: ['Code','Employee','Reason','Sent','Amount',''],
+      r1: ['Client visit, Grupo Alfa','today, 09:12'], r2: ['Carlos Mendes','Parking — event','yesterday, 17:40'], area: 'Sales · Campinas', review: 'Review',
+      awaiting: 'Awaiting approval', sub: 'Ana Souza · Client visit, Grupo Alfa — Campinas · 10/14/2026', decision: 'Your decision', comment: 'Comment (optional)', commentV: 'All good, thanks!',
+      approve: 'Approve', fix: 'Request a fix', reject: 'Reject',
+      fixNote: 'Requesting a fix sends it back to Ana with your comment. She adjusts and resends. In this demo we follow the approval path.',
+      rejNote: 'Rejecting closes the request and needs a reason. Ana is notified. In this demo we follow the approval path.',
+      cn: 'Invoice desk', toPost: 'To post · 1 person', posted: 'Posted to ERP', person: 'Ana Souza · Campinas branch', personSub: '1 approved request (REB-2026-0142) · approved by João Pereira today', pix: 'Payment: Pix (tax ID ***.456.789-**)', post: 'Post to ERP',
+      group: 'Approved requests are grouped by person and branch: one ERP posting each.',
+      mTitle: 'Post to ERP', mSub: 'Ana Souza · Campinas branch · 1 request', mNum: 'ERP posting number', mHelp: 'After posting, the employee is notified and, once the payment arrives, confirms receipt in the system.', cancel: 'Cancel', confirm: 'Confirm posting',
+      postedTag: 'Posted to ERP · awaiting payment', q: 'Has the payment reached your account?', qText: 'Posting NF-884213 of {t}, made on 10/20/2026. Payment arrives within 15 business days. A new reimbursement can only be opened after you confirm.',
+      yes: 'Yes, received', notYet: 'Not yet', notYetNote: '“Not yet” alerts the invoice desk and admins to check the payment. In this demo we continue with receipt confirmed.',
+      history: 'History', tl: [['Created and sent by Ana Souza','10/20 · 09:12 · 3 receipts'],['Approved by João Pereira','10/20 · 10:05 · “All good, thanks!”'],['Posted to ERP by Maria Lima','10/20 · 14:30 · NF-884213'],['Waiting for you to confirm receipt','deadline: up to 15 business days']],
+      done: 'Reimbursement complete', doneText: 'Ana confirmed receipt and the request was closed. She can now open a new reimbursement.',
+      roles: [['Ana','created and confirmed'],['João','approved'],['Maria','posted to ERP'],['Finance','paid']], again: 'Watch again'
+    }
+  };
+  var AMTS = [186.4, 58.9, 22.3];
+  var COLORS = { ana: ['#fff4c2', '#8a6200', 'AS'], joao: ['#dbeafe', '#1e40af', 'JP'], maria: ['#dcfce7', '#166534', 'ML'] };
+  var st = { step: 'home', scanned: false, scanning: false, modal: false, note: '' }, timer = null;
+  var root = document.getElementById('demo');
+  var $ = function (id) { return document.getElementById(id); };
+  function L() { return T[window.__lang === 'en' ? 'en' : 'pt']; }
+  function money(n) {
+    var en = window.__lang === 'en', parts = n.toFixed(2).split('.');
+    var int = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, en ? ',' : '.');
+    return 'R$ ' + int + (en ? '.' : ',') + parts[1];
+  }
+  function esc(x) { return String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function go(step, extra) {
+    clearTimeout(timer);
+    st = Object.assign({ step: step, modal: false, note: '', scanning: false, scanned: st.scanned }, extra || {});
+    render(true);
+  }
+  function render(animate) {
+    var t = L(), s = st.step;
+    var scanned = st.scanned || (s !== 'home' && s !== 'novo');
+    var n = scanned ? 3 : 2, total = 0;
+    for (var i = 0; i < n; i++) total += AMTS[i];
+    var tot = money(total);
+    var stage = { home: 1, novo: 1, aprovLista: 2, aprovDetalhe: 2, cn: 3, confirmar: 4, fim: 5 }[s];
+    var who = stage === 2 ? 'joao' : stage === 3 ? 'maria' : 'ana';
+
+    $('demo-t1').textContent = t.t1; $('demo-t2').textContent = t.t2; $('demo-restart').textContent = t.restart;
+    var to = ['home', 'aprovLista', 'cn', 'confirmar'];
+    $('demo-chips').innerHTML = t.chips.map(function (c, k) {
+      var cls = (k + 1 === stage ? ' on' : k + 1 < stage ? ' done' : '');
+      return '<button type="button" class="demo-chip' + cls + '" data-act="chip" data-to="' + to[k] + '"><i>' + (k + 1 < stage ? '✓' : k + 1) + '</i><span>' + esc(c[0]) + '<small>' + esc(c[1]) + '</small></span></button>';
+    }).join('');
+    var bn = t.banners[s];
+    $('demo-banner').hidden = !bn;
+    if (bn) $('demo-banner').innerHTML = '<strong>' + esc(bn[0]) + '</strong> ' + esc(bn[1]);
+
+    var on = { ana: [s === 'home' || s === 'fim', s === 'novo' || s === 'confirmar', false], joao: [false, true, false], maria: [false, true, false] }[who];
+    var badges = { ana: [0, 0, s === 'confirmar' ? 1 : 0], joao: [0, 0, s === 'aprovLista' ? 1 : 0], maria: [0, 0, 1] }[who];
+    var pc = COLORS[who], pp = t.people[who];
+    $('demo-side').innerHTML = '<div class="demo-brand"><i>R$</i><div><b>' + esc(t.brand) + '</b><span>' + esc(t.brandSub) + '</span></div></div>' +
+      t.menus[who].map(function (m, k) { return '<div class="demo-menu' + (on[k] ? ' on' : '') + '"><span>' + esc(m) + '</span>' + (badges[k] ? '<em>' + badges[k] + '</em>' : '') + '</div>'; }).join('') +
+      '<div class="demo-user"><div class="demo-av" style="background:' + pc[0] + ';color:' + pc[1] + '">' + pc[2] + '</div><div><b>' + esc(pp[0]) + '</b><span>' + esc(pp[1]) + '</span></div></div>';
+
+    var date = window.__lang === 'en' ? '10/14/2026' : '14/10/2026';
+    function expRows(withTag) {
+      var out = '';
+      for (var k = 0; k < n; k++) {
+        out += '<div><span class="d-receipt"></span><span style="flex:1 1 160px"><b>' + esc(t.exp[k][0]) + '</b><br><span class="d-mut">' + esc(t.exp[k][1]) + ' · ' + date + '</span></span>' +
+          (withTag ? '<span class="d-tag t-soft">' + esc(t.fromPhoto) + '</span>' : '') + '<span class="d-amt">' + money(AMTS[k]) + '</span></div>';
+      }
+      return out;
+    }
+    var note = st.note ? '<p class="d-note d-enter">' + esc(st.note) + '</p>' : '';
+    var h = '';
+    if (s === 'home') {
+      h = '<div class="d-row" style="justify-content:space-between;align-items:flex-end"><div><p class="d-mut" style="font-size:.82rem">' + esc(t.hello) + '</p><h5>Ana Souza</h5></div>' +
+        '<button type="button" class="d-btn y" data-act="novo">+ ' + esc(t.newR) + '</button></div>' +
+        '<div class="d-row"><div class="d-card d-stat"><span class="d-mut" style="font-size:.75rem">' + esc(t.inApproval) + '</span><b>0</b></div>' +
+        '<div class="d-card d-stat"><span class="d-mut" style="font-size:.75rem">' + esc(t.toReceive) + '</span><b>' + money(0) + '</b></div>' +
+        '<div class="d-card d-stat"><span class="d-mut" style="font-size:.75rem">' + esc(t.received) + '</span><b>' + money(1236.5) + '</b></div></div>' +
+        '<div class="d-card d-list"><div class="d-head">' + esc(t.last) + '</div>' + t.hist.map(function (r) {
+          return '<div><b style="min-width:110px">' + r[0] + '</b><span class="d-mut" style="flex:1 1 160px">' + esc(r[1]) + '</span><span class="d-tag t-ok">' + esc(t.paid) + '</span><span class="d-amt">' + r[2] + '</span></div>';
+        }).join('') + '</div>';
+    } else if (s === 'novo') {
+      var checks = [[true, t.checks[0]], [true, t.checks[1]], [true, t.checks[2]], [scanned, scanned ? t.checks[3] : t.checks[4]]];
+      h = '<div><p class="d-mut" style="font-size:.78rem">' + esc(t.crumb) + '</p><h5>' + esc(t.newR) + '</h5></div>' +
+        '<div class="d-row"><div style="flex:2 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">' +
+        '<div class="d-card" style="padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px">' +
+        '<label class="d-field" style="grid-column:1/-1">' + esc(t.reason) + '<div>' + esc(t.reasonV) + '</div></label>' +
+        '<label class="d-field">' + esc(t.cc) + '<div>' + esc(t.ccV) + '</div></label><label class="d-field">' + esc(t.date) + '<div>' + date + '</div></label></div>' +
+        '<div class="d-card d-list"><div class="d-head"><span>' + esc(t.receipts) + ' (' + n + ')</span><span class="d-mut" style="font-weight:400;font-size:.74rem">' + esc(t.readHint) + '</span></div>' + expRows(true) +
+        (st.scanning ? '<div><span class="d-receipt scan"></span><span><b>' + esc(t.reading) + '</b><br><span class="d-mut">' + esc(t.readingSub) + '</span></span></div>' : '') +
+        (!scanned && !st.scanning ? '<div><button type="button" class="d-btn y" data-act="scan">' + esc(t.snap) + '</button></div>' : '') +
+        '</div></div>' +
+        '<div class="d-card" style="flex:1 1 220px;padding:14px;display:flex;flex-direction:column;gap:10px"><b style="font-size:.86rem">' + esc(t.checksT) + '</b>' +
+        checks.map(function (c) { return '<div class="d-check"><i style="background:' + (c[0] ? '#dcfce7;color:#166534' : '#fef3c7;color:#92400e') + '">' + (c[0] ? '✓' : '!') + '</i><span>' + esc(c[1]) + '</span></div>'; }).join('') +
+        '<div style="border-top:1px solid var(--d-soft);padding-top:10px;display:flex;justify-content:space-between;align-items:baseline"><span class="d-mut">' + esc(t.total) + '</span><b style="font-size:1.25rem">' + tot + '</b></div>' +
+        (scanned ? '<button type="button" class="d-btn y" data-act="send">' + esc(t.send) + '</button>' : '<p class="d-mut" style="font-size:.76rem">' + esc(t.cantSend) + '</p>') +
+        '</div></div>';
+    } else if (s === 'aprovLista') {
+      h = '<h5>' + esc(t.approvals) + '</h5><div class="d-row" style="gap:6px"><span class="d-tag" style="height:30px;padding:0 12px;background:#0d0902;color:#fff">' + esc(t.waiting) + '</span><span class="d-tag" style="height:30px;padding:0 12px;background:#fff;border:1px solid var(--d-line);color:var(--d-mut)">' + esc(t.decided) + '</span></div>' +
+        '<div class="d-card" style="overflow-x:auto"><table class="d-table"><thead><tr>' + t.th.map(function (x) { return '<th>' + esc(x) + '</th>'; }).join('') + '</tr></thead><tbody>' +
+        '<tr style="background:#fffbea"><td><b>REB-2026-0142</b></td><td>Ana Souza<br><span class="d-mut" style="font-size:.72rem">' + esc(t.area) + '</span></td><td>' + esc(t.r1[0]) + '</td><td>' + esc(t.r1[1]) + '</td><td style="text-align:right"><b>' + tot + '</b></td><td style="text-align:right"><button type="button" class="d-btn y" data-act="detail">' + esc(t.review) + '</button></td></tr>' +
+        '<tr><td><b>REB-2026-0139</b></td><td>' + esc(t.r2[0]) + '<br><span class="d-mut" style="font-size:.72rem">' + esc(t.area) + '</span></td><td>' + esc(t.r2[1]) + '</td><td>' + esc(t.r2[2]) + '</td><td style="text-align:right"><b>' + money(48) + '</b></td><td style="text-align:right" class="d-mut">—</td></tr>' +
+        '</tbody></table></div>';
+    } else if (s === 'aprovDetalhe') {
+      h = '<div class="d-row" style="align-items:center;gap:10px"><h5>REB-2026-0142</h5><span class="d-tag t-wait">' + esc(t.awaiting) + '</span></div><p class="d-mut" style="font-size:.82rem;margin-top:-8px">' + esc(t.sub) + '</p>' +
+        '<div class="d-row"><div class="d-card d-list" style="flex:2 1 300px;min-width:0"><div class="d-head">' + esc(t.receipts) + '</div>' + expRows(false) +
+        '<div style="font-weight:700;justify-content:space-between"><span>' + esc(t.total) + '</span><span>' + tot + '</span></div></div>' +
+        '<div class="d-card" style="flex:1 1 220px;padding:14px;display:flex;flex-direction:column;gap:10px"><b style="font-size:.86rem">' + esc(t.decision) + '</b>' +
+        '<label class="d-field">' + esc(t.comment) + '<div>' + esc(t.commentV) + '</div></label>' +
+        '<button type="button" class="d-btn y" data-act="approve">' + esc(t.approve) + '</button>' +
+        '<div class="d-row" style="gap:6px"><button type="button" class="d-btn" style="flex:1 1 100px" data-act="fix">' + esc(t.fix) + '</button><button type="button" class="d-btn red" style="flex:1 1 100px" data-act="reject">' + esc(t.reject) + '</button></div>' + note + '</div></div>';
+    } else if (s === 'cn') {
+      h = '<h5>' + esc(t.cn) + '</h5><div class="d-row" style="gap:6px"><span class="d-tag" style="height:30px;padding:0 12px;background:#0d0902;color:#fff">' + esc(t.toPost) + '</span><span class="d-tag" style="height:30px;padding:0 12px;background:#fff;border:1px solid var(--d-line);color:var(--d-mut)">' + esc(t.posted) + '</span></div>' +
+        '<div class="d-card" style="padding:16px;display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center"><div class="demo-av" style="width:40px;height:40px;background:#fff4c2;color:#8a6200">AS</div>' +
+        '<div style="flex:1 1 220px;display:flex;flex-direction:column;gap:3px;font-size:.8rem"><b style="font-size:.9rem">' + esc(t.person) + '</b><span class="d-mut">' + esc(t.personSub) + '</span><span class="d-mut">' + esc(t.pix) + '</span></div>' +
+        '<b style="font-size:1.2rem">' + tot + '</b><button type="button" class="d-btn y" data-act="modal">' + esc(t.post) + '</button></div>' +
+        '<p class="d-mut" style="font-size:.78rem">' + esc(t.group) + '</p>';
+    } else if (s === 'confirmar') {
+      h = '<div class="d-row" style="align-items:center;gap:10px"><h5>REB-2026-0142</h5><span class="d-tag t-blue">' + esc(t.postedTag) + '</span></div>' +
+        '<div class="d-row"><div class="d-card" style="flex:1 1 280px;padding:16px;display:flex;flex-direction:column;gap:10px;border-color:#ffcd00;box-shadow:0 0 0 3px #fff4c2">' +
+        '<h6>' + esc(t.q) + '</h6><p class="d-mut" style="font-size:.82rem;line-height:1.5">' + esc(t.qText.replace('{t}', tot)) + '</p>' +
+        '<div class="d-row" style="gap:6px"><button type="button" class="d-btn y" style="flex:1 1 120px" data-act="paid">' + esc(t.yes) + '</button><button type="button" class="d-btn" style="flex:1 1 120px" data-act="notyet">' + esc(t.notYet) + '</button></div>' + note + '</div>' +
+        '<div class="d-card" style="flex:1 1 240px;padding:16px"><b style="font-size:.86rem">' + esc(t.history) + '</b><div style="margin-top:10px">' +
+        t.tl.map(function (x, k) { return '<div class="d-tl"><i style="background:' + ['#a8a29e', '#166534', '#1e40af', '#ffcd00'][k] + '"></i><div><b>' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></div></div>'; }).join('') + '</div></div></div>';
+    } else if (s === 'fim') {
+      h = '<div class="d-card" style="max-width:520px;margin:10px auto 0;padding:26px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">' +
+        '<div style="width:56px;height:56px;border-radius:999px;background:#dcfce7;color:#166534;display:grid;place-items:center;font-size:1.6rem;font-weight:800">✓</div>' +
+        '<h6 style="font-size:1.3rem">' + esc(t.done) + '</h6><span class="d-tag t-ok">REB-2026-0142 · ' + esc(t.paid) + ' · ' + tot + '</span>' +
+        '<p class="d-mut" style="font-size:.84rem;line-height:1.55">' + esc(t.doneText) + '</p>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;width:100%">' + t.roles.map(function (r) { return '<div style="background:var(--d-bg);border-radius:10px;padding:10px"><b>' + esc(r[0]) + '</b><br><span class="d-mut" style="font-size:.72rem">' + esc(r[1]) + '</span></div>'; }).join('') + '</div>' +
+        '<button type="button" class="d-btn y" data-act="restart">' + esc(t.again) + '</button></div>';
+    }
+    var main = $('demo-main');
+    main.innerHTML = '<div' + (animate ? ' class="d-enter"' : '') + ' style="display:flex;flex-direction:column;gap:16px">' + h + '</div>';
+
+    var modal = $('demo-modal');
+    modal.hidden = !st.modal;
+    if (st.modal) {
+      modal.innerHTML = '<div class="d-card d-enter" role="dialog" aria-label="' + esc(t.mTitle) + '"><h6>' + esc(t.mTitle) + '</h6><p class="d-mut" style="font-size:.82rem">' + esc(t.mSub) + ' · <b style="color:#0d0902">' + tot + '</b></p>' +
+        '<label class="d-field">' + esc(t.mNum) + '<div>NF-884213</div></label><p class="d-mut" style="font-size:.74rem;line-height:1.5">' + esc(t.mHelp) + '</p>' +
+        '<div class="d-row" style="justify-content:flex-end;gap:6px"><button type="button" class="d-btn" data-act="close">' + esc(t.cancel) + '</button><button type="button" class="d-btn y" data-act="launch">' + esc(t.confirm) + '</button></div></div>';
+    }
+  }
+  root.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-act]');
+    if (!el || !root.contains(el)) return;
+    var a = el.getAttribute('data-act'), t = L();
+    if (a === 'restart') go('home', { scanned: false });
+    else if (a === 'chip') { var to = el.getAttribute('data-to'); go(to, { scanned: to !== 'home' }); }
+    else if (a === 'novo') go('novo', { scanned: false });
+    else if (a === 'scan') { st.scanning = true; render(false); timer = setTimeout(function () { st.scanning = false; st.scanned = true; render(false); }, 1500); }
+    else if (a === 'send') go('aprovLista');
+    else if (a === 'detail') go('aprovDetalhe');
+    else if (a === 'approve') go('cn');
+    else if (a === 'fix') { st.note = t.fixNote; render(false); }
+    else if (a === 'reject') { st.note = t.rejNote; render(false); }
+    else if (a === 'modal') { st.modal = true; render(false); }
+    else if (a === 'close') { st.modal = false; render(false); }
+    else if (a === 'launch') go('confirmar');
+    else if (a === 'paid') go('fim');
+    else if (a === 'notyet') { st.note = t.notYetNote; render(false); }
+  });
+  window.addEventListener('langchange', function () { if (st.note) st.note = ''; render(false); });
+  render(false);
+})();
+
 /* ---------- idioma ---------- */
 (function () {
   var els = document.querySelectorAll('[data-en]');
