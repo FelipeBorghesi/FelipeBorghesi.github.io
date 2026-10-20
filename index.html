@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://felipeborghesi.github.io/">
 <meta property="og:title" content="Felipe Borghesi · Desenvolvedor back-end">
 <meta property="og:description" content="Sistema lento, legado ou processo no papel? Eu resolvo. Do banco ao deploy.">
@@ -18,6 +19,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://felipeborghesi.github.io/og.png">
+<script>try{if(localStorage.getItem('mode')==='light')document.documentElement.setAttribute('data-mode','light')}catch(e){}</script>
 <style>html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,12 +38,36 @@
   --del: #e08a8a;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --on-accent: #0b1016;
+  --net-a: 124,183,242;   /* rede do fundo: pontos perto do cursor e pacotes */
+  --net-dot: 125,138,153;
+  --net-hot: 226,180,90;
+  --glow: rgba(124,183,242,.18);
   color-scheme: dark;
+}
+/* modo claro, escolhido pelo botão do topo */
+:root[data-mode="light"] {
+  --bg: #f2f4f7;
+  --surface: #ffffff;
+  --line: #d6dde6;
+  --fg: #17202b;
+  --muted: #5b6878;
+  --accent: #2d6cb0;
+  --kw: #9a6408;
+  --ok: #23845a;
+  --del: #b8433f;
+  --on-accent: #ffffff;
+  --net-a: 45,108,176;
+  --net-dot: 91,104,120;
+  --net-hot: 176,120,20;
+  --glow: rgba(45,108,176,.16);
+  color-scheme: light;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
+  transition: background-color .25s, color .25s;
   background: var(--bg);
   color: var(--fg);
   font: 400 1rem/1.65 var(--sans);
@@ -72,8 +98,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .brand { display: flex; align-items: center; gap: 12px; color: var(--fg); min-width: 0; }
 .brand:hover { text-decoration: none; }
 .mark { display: grid; place-items: center; width: 34px; height: 34px; flex: none; border: 1px solid var(--accent); border-radius: 4px;
-  font: 700 .8rem var(--mono); color: var(--accent); background: rgba(124,183,242,.08); letter-spacing: .02em; }
-.brand:hover .mark { background: var(--accent); color: #0b1016; }
+  font: 700 .8rem var(--mono); color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, transparent); letter-spacing: .02em; }
+.brand:hover .mark { background: var(--accent); color: var(--on-accent); }
 .prompt { font: 500 .85rem var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .prompt b { color: var(--ok); font-weight: 500; }
 .prompt i { color: var(--accent); font-style: normal; }
@@ -85,7 +111,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
 .top nav a.active { color: var(--fg); background: var(--surface); }
 .top nav a.active::before { content: "./"; color: var(--ok); }
 .top nav a.cta-nav { margin-left: 8px; border: 1px solid var(--accent); color: var(--accent); }
-.top nav a.cta-nav:hover, .top nav a.cta-nav.active { background: var(--accent); color: #0b1016; }
+.top nav a.cta-nav:hover, .top nav a.cta-nav.active { background: var(--accent); color: var(--on-accent); }
 .top nav a.cta-nav.active::before { content: none; }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; }
 .progress span { display: block; height: 100%; width: 100%; transform-origin: 0 50%; transform: scaleX(0);
@@ -96,6 +122,24 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outlin
   .top nav a.cta-nav { margin-left: auto; }
 }
 @media (prefers-reduced-motion: reduce) { .pcur { animation: none; } }
+
+/* tema e idioma */
+.toggles { display: flex; align-items: center; gap: 8px; order: 3; flex: none; }
+.mode { display: grid; place-items: center; width: 32px; height: 30px; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--muted); cursor: pointer; }
+.mode:hover { color: var(--fg); border-color: var(--accent); }
+.mode svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.mode .i-moon { fill: currentColor; stroke: none; }
+.mode .i-sun { display: none; }
+:root[data-mode="light"] .mode .i-sun { display: block; }
+:root[data-mode="light"] .mode .i-moon { display: none; }
+.lang { display: flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; flex: none; }
+.lang button { font: 500 .72rem var(--mono); color: var(--muted); background: transparent; border: 0; padding: 7px 9px; cursor: pointer; letter-spacing: .04em; }
+.lang button + button { border-left: 1px solid var(--line); }
+.lang button:hover { color: var(--fg); }
+.lang button[aria-pressed="true"] { color: var(--on-accent); background: var(--ok); }
+.top nav { order: 2; }
+.brand { order: 1; }
+@media (max-width: 760px) { .toggles { order: 2; margin-left: auto; } .top nav { order: 3; } }
 
 /* fundo interativo */
 #net { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -119,7 +163,7 @@ main, footer { position: relative; z-index: 1; }
 /* bonequinho */
 .avatar { margin: 0; display: grid; justify-items: center; gap: 10px; position: relative; padding-top: 64px; }
 .avatar-btn { background: none; border: 0; padding: 0; cursor: pointer; line-height: 0; border-radius: 8px; }
-.avatar svg { width: 216px; height: auto; display: block; overflow: visible; filter: drop-shadow(0 18px 30px rgba(124,183,242,.18)); }
+.avatar svg { width: 216px; height: auto; display: block; overflow: visible; filter: drop-shadow(0 18px 30px var(--glow)); }
 #body { animation: bob 1.6s steps(2) infinite; }
 @keyframes bob { 50% { transform: translateY(.35px); } }
 .avatar-btn:active svg { transform: translateY(2px); }
@@ -233,7 +277,7 @@ h3 small { display: block; font: 500 .85rem var(--mono); color: var(--accent); m
 .bench-bars { display: grid; gap: 6px; min-width: 0; }
 .bar { position: relative; height: 22px; width: 100%; }
 .bar::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--v); border-radius: 2px; }
-.bar.before::before { background: var(--line); border: 1px solid #3a4757; }
+.bar.before::before { background: var(--line); border: 1px solid color-mix(in srgb, var(--muted) 45%, transparent); }
 .bar.after::before { background: var(--ok); }
 .bar.range::after { content: ""; position: absolute; top: 0; bottom: 0; left: var(--v); width: calc(var(--r) - var(--v)); border-radius: 0 2px 2px 0;
   background: repeating-linear-gradient(135deg, rgba(127,200,160,.45) 0 4px, rgba(127,200,160,.12) 4px 8px); }
@@ -295,8 +339,8 @@ h3 small { display: block; font: 500 .85rem var(--mono); color: var(--accent); m
 .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 4px;
   font: 500 .82rem var(--mono); color: var(--fg); background: var(--surface); transition: border-color .15s, background .15s; }
 .btn:hover { text-decoration: none; border-color: var(--accent); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: #0b1016; }
-.btn.primary:hover { background: #9cc9f6; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn.primary:hover { filter: brightness(1.12); }
 
 /* outros projetos */
 .others-head { font: 500 .75rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding-top: 32px; border-top: 1px dashed var(--line); margin-bottom: 16px; }
@@ -345,15 +389,25 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#inicio" aria-label="Voltar ao início">
+    <a class="brand" href="#inicio" aria-label="Voltar ao início" data-en-aria-label="Back to top">
       <span class="mark" aria-hidden="true">FB</span>
       <span class="prompt"><b>felipe</b>@<i>borghesi</i>:<span id="cwd">~</span>$<span class="pcur" aria-hidden="true"></span></span>
     </a>
-    <nav aria-label="Seções">
-      <a href="#projetos" data-sec="projetos">projetos</a>
-      <a href="#trajetoria" data-sec="trajetoria">trajetória</a>
+    <div class="toggles">
+    <button class="mode" id="mode" type="button" aria-label="Alternar tema claro/escuro" data-en-aria-label="Toggle light/dark theme">
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+    </button>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="pt" aria-pressed="true">PT</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    </div>
+    <nav aria-label="Seções" data-en-aria-label="Sections">
+      <a href="#projetos" data-sec="projetos" data-en="projects">projetos</a>
+      <a href="#trajetoria" data-sec="trajetoria" data-en="career">trajetória</a>
       <a href="#stack" data-sec="stack">stack</a>
-      <a href="#contato" data-sec="contato" class="cta-nav">contato</a>
+      <a href="#contato" data-sec="contato" class="cta-nav" data-en="contact">contato</a>
     </nav>
   </div>
   <div class="progress" aria-hidden="true"><span id="prog"></span></div>
@@ -362,145 +416,148 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 <main>
   <div class="wrap hero" id="inicio">
     <div class="hero-text">
-      <div class="eyebrow"><span class="live" aria-hidden="true"></span>Desenvolvedor back-end · Londrina, PR</div>
+      <div class="eyebrow" data-en="&lt;span class=&quot;live&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;Back-end developer · Londrina, Brazil"><span class="live" aria-hidden="true"></span>Desenvolvedor back-end · Londrina, PR</div>
       <h1>Felipe Borghesi<span class="cursor" aria-hidden="true"></span></h1>
-      <p class="lede">Me entrega o sistema lento, o legado que ninguém quer mexer ou o processo que ainda roda no papel. Eu resolvo. <span>Do banco ao deploy, do Delphi ao Node.</span></p>
+      <p class="lede" data-en="Hand me the slow system, the legacy code nobody wants to touch, or the process still running on paper. I’ll fix it. &lt;span&gt;From database to deploy, from Delphi to Node.&lt;/span&gt;">Me entrega o sistema lento, o legado que ninguém quer mexer ou o processo que ainda roda no papel. Eu resolvo. <span>Do banco ao deploy, do Delphi ao Node.</span></p>
       <div class="cta">
-        <a class="btn primary" href="#projetos">Ver projetos ↓</a>
-        <a class="btn" href="https://www.linkedin.com/in/felipe-borghesi-575594217/" target="_blank" rel="noopener">Falar comigo no LinkedIn ↗</a>
+        <a class="btn primary" href="#projetos" data-en="See projects ↓">Ver projetos ↓</a>
+        <a class="btn" href="https://www.linkedin.com/in/felipe-borghesi-575594217/" target="_blank" rel="noopener" data-en="Talk to me on LinkedIn ↗">Falar comigo no LinkedIn ↗</a>
       </div>
       <div class="status" aria-label="Status">
         <span><i class="dot ok"></i>api: online</span>
-        <span><i class="dot"></i>db: conectado</span>
+        <span data-en="&lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;db: connected"><i class="dot"></i>db: conectado</span>
         <span id="uptime">uptime: 00:00:00</span>
-        <span><i class="dot"></i>remoto · híbrido · presencial</span>
+        <span data-en="&lt;i class=&quot;dot&quot;&gt;&lt;/i&gt;remote · hybrid · on-site"><i class="dot"></i>remoto · híbrido · presencial</span>
       </div>
     </div>
 
     <figure class="avatar">
-      <div class="bubble" id="bubble" aria-live="polite">Oi! Clica em mim.</div>
-      <button class="avatar-btn" id="avatar" type="button" aria-label="Bonequinho do Felipe. Clique para ele falar algo.">
+      <div class="bubble" id="bubble" aria-live="polite" data-en="Hi! Click me.">Oi! Clica em mim.</div>
+      <button class="avatar-btn" id="avatar" type="button" aria-label="Bonequinho do Felipe. Clique para ele falar algo." data-en-aria-label="Felipe&#x27;s pixel avatar. Click to make him say something.">
         <svg id="dev" viewBox="0 0 27 26" shape-rendering="crispEdges" aria-hidden="true">
           <g id="body"></g>
           <g id="eyes"></g>
           <g id="mouth"></g>
         </svg>
       </button>
-      <figcaption>clique para conversar</figcaption>
+      <figcaption data-en="click to chat">clique para conversar</figcaption>
     </figure>
 
-    <div class="term" role="group" aria-label="Resumo em forma de consulta SQL">
-      <div class="term-head"><span>sqlplus · sessão 1</span><span>Oracle SQL</span></div>
-<pre><span class="k">SELECT</span> <span class="id">resultado</span>, <span class="id">valor</span>
+    <div class="term" role="group" aria-label="Resumo em forma de consulta SQL" data-en-aria-label="Summary as a SQL query">
+      <div class="term-head"><span data-en="sqlplus · session 1">sqlplus · sessão 1</span><span>Oracle SQL</span></div>
+<pre data-en="&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;id&quot;&gt;result&lt;/span&gt;, &lt;span class=&quot;id&quot;&gt;value&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt;  &lt;span class=&quot;id&quot;&gt;deliveries&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;id&quot;&gt;dev&lt;/span&gt; = &lt;span class=&quot;s&quot;&gt;&#x27;FelipeBorghesi&#x27;&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;ORDER BY&lt;/span&gt; &lt;span class=&quot;id&quot;&gt;impact&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt;;"><span class="k">SELECT</span> <span class="id">resultado</span>, <span class="id">valor</span>
   <span class="k">FROM</span>  <span class="id">entregas</span>
  <span class="k">WHERE</span> <span class="id">dev</span> = <span class="s">'FelipeBorghesi'</span>
  <span class="k">ORDER BY</span> <span class="id">impacto</span> <span class="k">DESC</span>;</pre>
       <table class="res">
-        <thead><tr><th>RESULTADO</th><th>VALOR</th></tr></thead>
+        <thead><tr><th data-en="RESULT">RESULTADO</th><th data-en="VALUE">VALOR</th></tr></thead>
         <tbody>
-          <tr><td>relatório: 15 → 5 min</td><td class="s">3×</td></tr>
-          <tr><td>mensalidade PJ: 60 → 20–40 min</td><td class="s">até 3×</td></tr>
-          <tr><td>sistemas entregues</td><td class="n">5</td></tr>
-          <tr><td>sistemas em produção</td><td class="n">5</td></tr>
-          <tr><td>anos em TI</td><td class="n">6+</td></tr>
+          <tr><td data-en="report: 15 → 5 min">relatório: 15 → 5 min</td><td class="s">3×</td></tr>
+          <tr><td data-en="corporate billing: 60 → 20–40 min">mensalidade PJ: 60 → 20–40 min</td><td class="s" data-en="up to 3×">até 3×</td></tr>
+          <tr><td data-en="systems delivered">sistemas entregues</td><td class="n">5</td></tr>
+          <tr><td data-en="systems in production">sistemas em produção</td><td class="n" data-en="all 5">todos os 5</td></tr>
+          <tr><td data-en="years in IT">anos em TI</td><td class="n">6+</td></tr>
         </tbody>
       </table>
-      <div class="rows">5 linhas selecionadas.</div>
+      <div class="rows" data-en="5 rows selected.">5 linhas selecionadas.</div>
     </div>
   </div>
 
   <section id="projetos">
     <div class="wrap">
-      <div class="sec-head"><h2>Projetos</h2><span class="cmd">ls ./projetos --profissionais</span></div>
+      <div class="sec-head"><h2 data-en="Projects">Projetos</h2><span class="cmd" data-en="ls ./projects --professional">ls ./projetos --profissionais</span></div>
 
       <article class="case">
-        <div class="case-meta"><span class="tag">Projeto interno</span><span>reembolsos</span><span>em produção</span></div>
-        <h3><small>projeto/reembolso</small>Hub corporativo de despesas e reembolsos</h3>
-        <p>O funcionário fotografa o comprovante, o sistema lê os dados com OCR e a solicitação segue sozinha por aprovação, lançamento no ERP e pagamento. Acabou a digitação manual e o vai e vem de e-mails.</p>
-        <div class="pipe" aria-label="Fluxo da solicitação de reembolso">
-          <div><span class="n">01</span><b>Captura</b><small>Foto ou PDF do comprovante</small></div>
-          <div><span class="n">02</span><b>OCR</b><small>Dados preenchidos sozinhos</small></div>
-          <div><span class="n">03</span><b>Conferência</b><small>Validações automáticas</small></div>
-          <div><span class="n">04</span><b>Aprovação</b><small>Gestor aprova ou devolve</small></div>
-          <div><span class="n">05</span><b>ERP</b><small>Lançamento agrupado</small></div>
-          <div><span class="n">06</span><b>Pagamento</b><small>Funcionário confirma</small></div>
+        <div class="case-meta"><span class="tag" data-en="Internal project">Projeto interno</span><span data-en="reimbursements">reembolsos</span><span data-en="in production">em produção</span></div>
+        <h3 data-en="&lt;small&gt;project/reimbursement&lt;/small&gt;Corporate expense and reimbursement hub"><small>projeto/reembolso</small>Hub corporativo de despesas e reembolsos</h3>
+        <p data-en="Employees snap a photo of the receipt, the system reads it with OCR, and the request moves on its own through approval, ERP posting and payment. No more manual typing or email back-and-forth.">O funcionário fotografa o comprovante, o sistema lê os dados com OCR e a solicitação segue sozinha por aprovação, lançamento no ERP e pagamento. Acabou a digitação manual e o vai e vem de e-mails.</p>
+        <div class="pipe" aria-label="Fluxo da solicitação de reembolso" data-en-aria-label="Reimbursement request flow">
+          <div data-en="&lt;span class=&quot;n&quot;&gt;01&lt;/span&gt;&lt;b&gt;Capture&lt;/b&gt;&lt;small&gt;Photo or PDF of the receipt&lt;/small&gt;"><span class="n">01</span><b>Captura</b><small>Foto ou PDF do comprovante</small></div>
+          <div data-en="&lt;span class=&quot;n&quot;&gt;02&lt;/span&gt;&lt;b&gt;OCR&lt;/b&gt;&lt;small&gt;Fields filled automatically&lt;/small&gt;"><span class="n">02</span><b>OCR</b><small>Dados preenchidos sozinhos</small></div>
+          <div data-en="&lt;span class=&quot;n&quot;&gt;03&lt;/span&gt;&lt;b&gt;Review&lt;/b&gt;&lt;small&gt;Automatic validations&lt;/small&gt;"><span class="n">03</span><b>Conferência</b><small>Validações automáticas</small></div>
+          <div data-en="&lt;span class=&quot;n&quot;&gt;04&lt;/span&gt;&lt;b&gt;Approval&lt;/b&gt;&lt;small&gt;Manager approves or sends back&lt;/small&gt;"><span class="n">04</span><b>Aprovação</b><small>Gestor aprova ou devolve</small></div>
+          <div data-en="&lt;span class=&quot;n&quot;&gt;05&lt;/span&gt;&lt;b&gt;ERP&lt;/b&gt;&lt;small&gt;Grouped posting&lt;/small&gt;"><span class="n">05</span><b>ERP</b><small>Lançamento agrupado</small></div>
+          <div data-en="&lt;span class=&quot;n&quot;&gt;06&lt;/span&gt;&lt;b&gt;Payment&lt;/b&gt;&lt;small&gt;Employee confirms&lt;/small&gt;"><span class="n">06</span><b>Pagamento</b><small>Funcionário confirma</small></div>
         </div>
         <figure class="shot">
           <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <button class="shot-btn" type="button" data-zoom="img/reembolso.png" aria-label="Ampliar: Tela inicial do hub de reembolsos com resumo do mês e solicitações"><img src="img/reembolso.png" alt="Tela inicial do hub de reembolsos com resumo do mês e solicitações" loading="lazy" width="1875" height="740"></button>
-          <figcaption>Tela inicial do funcionário, com dados de demonstração.</figcaption>
+          <button class="shot-btn" type="button" data-zoom="img/reembolso.png" aria-label="Ampliar: Tela inicial do hub de reembolsos com resumo do mês e solicitações" data-en-aria-label="Enlarge: reimbursement hub home screen with monthly summary and requests"><img src="img/reembolso.png" alt="Tela inicial do hub de reembolsos com resumo do mês e solicitações" data-en-alt="Reimbursement hub home screen with monthly summary and requests" loading="lazy" width="1875" height="740"></button>
+          <figcaption data-en="Employee home screen, with demo data.">Tela inicial do funcionário, com dados de demonstração.</figcaption>
         </figure>
         <ul class="changes">
-          <li><span><strong>Leitura de comprovantes com OCR e IA</strong>, com detecção de comprovante duplicado.</span></li>
-          <li><span><strong>Arquitetura limpa</strong>, com OCR e ERP como integrações trocáveis sem mexer nas regras de negócio.</span></li>
-          <li><span><strong>Segurança e LGPD</strong>: dados sensíveis criptografados, perfis de acesso, auditoria e login com a conta Microsoft.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Receipt reading with OCR and AI&lt;/strong&gt;, with duplicate receipt detection.&lt;/span&gt;"><span><strong>Leitura de comprovantes com OCR e IA</strong>, com detecção de comprovante duplicado.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Clean architecture&lt;/strong&gt;, with OCR and ERP as swappable integrations that don’t touch the business rules.&lt;/span&gt;"><span><strong>Arquitetura limpa</strong>, com OCR e ERP como integrações trocáveis sem mexer nas regras de negócio.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Security and LGPD (Brazil’s GDPR)&lt;/strong&gt;: encrypted sensitive data, access roles, audit trail and Microsoft account sign-in.&lt;/span&gt;"><span><strong>Segurança e LGPD</strong>: dados sensíveis criptografados, perfis de acesso, auditoria e login com a conta Microsoft.</span></li>
         </ul>
         <div class="stack"><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Next.js</span><span>Docker</span></div>
       </article>
 
       <article class="case">
-        <div class="case-meta"><span class="tag">Projeto interno</span><span>saúde suplementar</span><span>sistema legado</span><span>em produção</span></div>
-        <h3><small>projeto/melhorias</small>Otimização de um ERP para operadoras de plano de saúde</h3>
-        <p>Relatórios lentos e mensalidades que levavam uma hora para gerar. Mexi no código legado e no banco, sem reescrever o sistema, e deixei essas rotinas até 3 vezes mais rápidas.</p>
-        <div class="bench" role="img" aria-label="Relatório: de 15 para 5 minutos. Mensalidade de um contrato PJ: de cerca de 60 para 20 a 40 minutos.">
-          <div class="bench-head"><span>tempo de execução</span><span>escala: 0 a 60 min</span></div>
+        <div class="case-meta"><span class="tag" data-en="Internal project">Projeto interno</span><span data-en="health insurance">saúde suplementar</span><span data-en="legacy system">sistema legado</span><span data-en="in production">em produção</span></div>
+        <h3 data-en="&lt;small&gt;project/optimizations&lt;/small&gt;Optimizing an ERP for health insurance providers"><small>projeto/melhorias</small>Otimização de um ERP para operadoras de plano de saúde</h3>
+        <p data-en="Slow reports and monthly billing that took an hour to generate. I worked on the legacy code and the database, without rewriting the system, and made these routines up to 3× faster.">Relatórios lentos e mensalidades que levavam uma hora para gerar. Mexi no código legado e no banco, sem reescrever o sistema, e deixei essas rotinas até 3 vezes mais rápidas.</p>
+        <div class="bench" role="img" aria-label="Relatório: de 15 para 5 minutos. Mensalidade de um contrato PJ: de cerca de 60 para 20 a 40 minutos." data-en-aria-label="Report: from 15 to 5 minutes. Monthly billing for a corporate contract: from about 60 to 20–40 minutes.">
+          <div class="bench-head"><span data-en="execution time">tempo de execução</span><span data-en="scale: 0 to 60 min">escala: 0 a 60 min</span></div>
           <div class="bench-row">
-            <div class="bench-label">Extração de relatório</div>
+            <div class="bench-label" data-en="Report extraction">Extração de relatório</div>
             <div class="bench-bars">
               <div class="bar before" style="--v:25%"><span>15 min</span></div>
               <div class="bar after" style="--v:8.33%"><span>5 min</span></div>
             </div>
-            <div class="bench-gain">3× mais rápido</div>
+            <div class="bench-gain" data-en="3× faster">3× mais rápido</div>
           </div>
           <div class="bench-row">
-            <div class="bench-label">Mensalidade de um contrato PJ<small>R$ 1 mi/mês, muitos beneficiários</small></div>
+            <div class="bench-label" data-en="Monthly billing, corporate contract&lt;small&gt;R$ 1M/month, many members&lt;/small&gt;">Mensalidade de um contrato PJ<small>R$ 1 mi/mês, muitos beneficiários</small></div>
             <div class="bench-bars">
               <div class="bar before" style="--v:100%"><span>~60 min</span></div>
               <div class="bar after range" style="--v:33.33%;--r:66.67%"><span>20–40 min</span></div>
             </div>
-            <div class="bench-gain">até 3× mais rápido</div>
+            <div class="bench-gain" data-en="up to 3× faster">até 3× mais rápido</div>
           </div>
-          <div class="bench-legend"><span><i class="sw before"></i>antes</span><span><i class="sw after"></i>depois</span></div>
+          <div class="bench-legend"><span data-en="&lt;i class=&quot;sw before&quot;&gt;&lt;/i&gt;before"><i class="sw before"></i>antes</span><span data-en="&lt;i class=&quot;sw after&quot;&gt;&lt;/i&gt;after"><i class="sw after"></i>depois</span></div>
         </div>
         <ul class="changes">
-          <li><span><strong>Consultas reescritas</strong> a partir da análise dos planos de execução, com índices criados e revisados.</span></li>
-          <li><span><strong>Processamento em lote reorganizado</strong> no cálculo das mensalidades dos contratos grandes.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Rewrote queries&lt;/strong&gt; based on execution plan analysis, creating and reviewing indexes.&lt;/span&gt;"><span><strong>Consultas reescritas</strong> a partir da análise dos planos de execução, com índices criados e revisados.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Reorganized batch processing&lt;/strong&gt; for billing calculation on large contracts.&lt;/span&gt;"><span><strong>Processamento em lote reorganizado</strong> no cálculo das mensalidades dos contratos grandes.</span></li>
         </ul>
-        <div class="stack"><span>Oracle SQL</span><span>PL/SQL</span><span>Delphi</span><span>Processamento em lote</span></div>
+        <div class="stack"><span>Oracle SQL</span><span>PL/SQL</span><span>Delphi</span><span data-en="Batch processing">Processamento em lote</span></div>
       </article>
 
       <article class="case">
-        <div class="case-meta"><span class="tag">Projeto interno</span><span>contas a pagar</span><span>em produção</span></div>
-        <h3><small>projeto/contas-a-pagar</small>Contas a pagar: do boleto recebido à despesa paga</h3>
-        <p>Boletos e notas fiscais circulavam por e-mail, planilha e papel. Criei um sistema em que cada despesa tem etapa, responsável e prazo visíveis, sem precisar perguntar a ninguém onde ela está.</p>
-        <ol class="flow" aria-label="Etapas da despesa">
-          <li>recebimento</li><li>conferência</li><li>aprovação</li><li>lançamento</li><li>pagamento</li><li>finalizada</li>
+        <div class="case-meta"><span class="tag" data-en="Internal project">Projeto interno</span><span data-en="accounts payable">contas a pagar</span><span data-en="in production">em produção</span></div>
+        <h3 data-en="&lt;small&gt;project/accounts-payable&lt;/small&gt;Accounts payable: from bill received to bill paid"><small>projeto/contas-a-pagar</small>Contas a pagar: do boleto recebido à despesa paga</h3>
+        <p data-en="Bank slips and invoices were scattered across email, spreadsheets and paper. I built a system where every expense has a visible stage, owner and due date, so nobody has to ask where it is.">Boletos e notas fiscais circulavam por e-mail, planilha e papel. Criei um sistema em que cada despesa tem etapa, responsável e prazo visíveis, sem precisar perguntar a ninguém onde ela está.</p>
+        <ol class="flow" aria-label="Etapas da despesa" data-en-aria-label="Expense stages">
+          <li data-en="received">recebimento</li><li data-en="review">conferência</li><li data-en="approval">aprovação</li><li data-en="posting">lançamento</li><li data-en="payment">pagamento</li><li data-en="done">finalizada</li>
         </ol>
         <figure class="shot">
           <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
-          <button class="shot-btn" type="button" data-zoom="img/despesa.png" aria-label="Ampliar: Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável"><img src="img/despesa.png" alt="Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável" loading="lazy" width="1875" height="925"></button>
-          <figcaption>Cadastro de despesa: arraste o XML ou o PDF e os campos se preenchem.</figcaption>
+          <button class="shot-btn" type="button" data-zoom="img/despesa.png" aria-label="Ampliar: Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável" data-en-aria-label="Enlarge: expense entry with auto-fill from XML, PDF or bank slip barcode"><img src="img/despesa.png" alt="Cadastro de despesa com preenchimento automático por XML, PDF ou linha digitável" data-en-alt="Expense entry with auto-fill from XML, PDF or bank slip barcode" loading="lazy" width="1875" height="925"></button>
+          <figcaption data-en="Expense entry: drop the XML or PDF and the fields fill themselves.">Cadastro de despesa: arraste o XML ou o PDF e os campos se preenchem.</figcaption>
         </figure>
         <ul class="changes">
-          <li><span><strong>Leitura automática de NF-e e boletos</strong>: fornecedor, valor, parcelas e vencimento preenchidos a partir do XML, do PDF ou da linha digitável.</span></li>
-          <li><span><strong>Histórico que não pode ser alterado</strong>, garantido por triggers no PostgreSQL.</span></li>
-          <li><span><strong>Alertas de vencimento</strong> e relatório do tempo médio em cada etapa.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Automatic reading of e-invoices (NF-e) and bank slips&lt;/strong&gt;: supplier, amount, installments and due date filled from the XML, the PDF or the slip barcode.&lt;/span&gt;"><span><strong>Leitura automática de NF-e e boletos</strong>: fornecedor, valor, parcelas e vencimento preenchidos a partir do XML, do PDF ou da linha digitável.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Tamper-proof history&lt;/strong&gt;, enforced by PostgreSQL triggers.&lt;/span&gt;"><span><strong>Histórico que não pode ser alterado</strong>, garantido por triggers no PostgreSQL.</span></li>
+          <li data-en="&lt;span&gt;&lt;strong&gt;Due date alerts&lt;/strong&gt; and a report on average time per stage.&lt;/span&gt;"><span><strong>Alertas de vencimento</strong> e relatório do tempo médio em cada etapa.</span></li>
         </ul>
         <div class="stack"><span>Node.js</span><span>TypeScript</span><span>PostgreSQL</span><span>Next.js</span><span>Docker</span></div>
       </article>
 
-      <div class="others-head">Outros projetos</div>
+      <div class="others-head" data-en="Other projects">Outros projetos</div>
       <div class="others">
         <article class="mini">
-          <div class="case-meta"><span class="tag">Para cliente</span><span>em produção</span></div>
-          <h3><small>projeto/concursos</small>Plataforma de inscrições em concursos</h3>
-          <p>Formulários de inscrição e todo o back-end em Java de uma plataforma de concursos de uma instituição de ensino. Em produção, atendendo candidatos todos os dias.</p>
+          <div class="case-meta"><span class="tag" data-en="Client project">Para cliente</span><span data-en="in production">em produção</span></div>
+          <h3 data-en="&lt;small&gt;project/exams&lt;/small&gt;Exam registration platform"><small>projeto/concursos</small>Plataforma de inscrições em concursos</h3>
+          <p data-en="Registration forms and the entire Java back-end of an exam platform for an educational institution. In production, serving candidates every day.">Formulários de inscrição e todo o back-end em Java de uma plataforma de concursos de uma instituição de ensino. Em produção, atendendo candidatos todos os dias.</p>
           <div class="stack"><span>Java</span><span>JSP</span><span>PostgreSQL</span></div>
         </article>
         <article class="mini">
-          <div class="case-meta"><span class="tag">ERP</span><span>integração B2B</span><span>em produção</span></div>
-          <h3><small>projeto/integracao-erp</small>ERP integrado a uma plataforma B2B</h3>
-          <p>Integração de um ERP em Progress com uma plataforma B2B: itens e estoque cadastrados no ERP aparecem na loja on-line automaticamente, via API.</p>
+          <div class="case-meta"><span class="tag">ERP</span><span data-en="B2B integration">integração B2B</span><span data-en="in production">em produção</span></div>
+          <h3 data-en="&lt;small&gt;project/erp-integration&lt;/small&gt;ERP integrated with a B2B platform"><small>projeto/integracao-erp</small>ERP integrado a uma plataforma B2B</h3>
+          <p data-en="Integrated a Progress-based ERP with a B2B platform: items and stock registered in the ERP show up in the online store automatically, via API.">Integração de um ERP em Progress com uma plataforma B2B: itens e estoque cadastrados no ERP aparecem na loja on-line automaticamente, via API.</p>
           <div class="stack"><span>Progress 4GL</span><span>Python</span><span>API REST</span></div>
         </article>
       </div>
@@ -509,32 +566,32 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
   <section id="trajetoria">
     <div class="wrap">
-      <div class="sec-head"><h2>Trajetória</h2><span class="cmd">git log --oneline carreira</span></div>
+      <div class="sec-head"><h2 data-en="Career">Trajetória</h2><span class="cmd" data-en="git log --oneline career">git log --oneline carreira</span></div>
       <ol class="timeline">
         <li class="now">
-          <time>set 2026 — hoje</time>
-          <div><b>Analista de sistemas</b><span>Desenvolvimento de sistemas internos: hubs de reembolso e de contas a pagar, do banco ao deploy.</span></div>
+          <time data-en="Sep 2026 — now">set 2026 — hoje</time>
+          <div data-en="&lt;b&gt;Systems analyst&lt;/b&gt;&lt;span&gt;Building internal systems: reimbursement and accounts payable hubs, from database to deploy.&lt;/span&gt;"><b>Analista de sistemas</b><span>Desenvolvimento de sistemas internos: hubs de reembolso e de contas a pagar, do banco ao deploy.</span></div>
         </li>
         <li>
-          <time>mai — set 2026</time>
-          <div><b>Desenvolvedor freelance</b><span>Back-end em Java de uma plataforma de concursos e integração de um ERP em Progress com uma plataforma B2B.</span></div>
+          <time data-en="May — Sep 2026">mai — set 2026</time>
+          <div data-en="&lt;b&gt;Freelance developer&lt;/b&gt;&lt;span&gt;Java back-end for an exam registration platform and integration of a Progress ERP with a B2B platform.&lt;/span&gt;"><b>Desenvolvedor freelance</b><span>Back-end em Java de uma plataforma de concursos e integração de um ERP em Progress com uma plataforma B2B.</span></div>
         </li>
         <li>
-          <time>jan 2024 — mai 2026</time>
-          <div><b>Analista de suporte técnico → Suporte III</b><span>Empresa de software que desenvolve um ERP para operadoras de plano de saúde. Otimização de relatórios e da geração de mensalidades no sistema legado, com PL/SQL e Oracle.</span></div>
+          <time data-en="Jan 2024 — May 2026">jan 2024 — mai 2026</time>
+          <div data-en="&lt;b&gt;Technical support analyst → Support III&lt;/b&gt;&lt;span&gt;Software company that builds an ERP for health insurance providers. Optimized reports and monthly billing in the legacy system with PL/SQL and Oracle.&lt;/span&gt;"><b>Analista de suporte técnico → Suporte III</b><span>Empresa de software que desenvolve um ERP para operadoras de plano de saúde. Otimização de relatórios e da geração de mensalidades no sistema legado, com PL/SQL e Oracle.</span></div>
         </li>
         <li>
-          <time>fev 2023 — jan 2024</time>
-          <div><b>Suporte ao cliente</b><span>Multinacional de tecnologia.</span></div>
+          <time data-en="Feb 2023 — Jan 2024">fev 2023 — jan 2024</time>
+          <div data-en="&lt;b&gt;Customer support&lt;/b&gt;&lt;span&gt;Multinational technology company.&lt;/span&gt;"><b>Suporte ao cliente</b><span>Multinacional de tecnologia.</span></div>
         </li>
         <li>
-          <time>mar 2020 — jan 2023</time>
-          <div><b>Assistente de TI</b><span>Empresa de software. Onde tudo começou.</span></div>
+          <time data-en="Mar 2020 — Jan 2023">mar 2020 — jan 2023</time>
+          <div data-en="&lt;b&gt;IT assistant&lt;/b&gt;&lt;span&gt;Software company. Where it all started.&lt;/span&gt;"><b>Assistente de TI</b><span>Empresa de software. Onde tudo começou.</span></div>
         </li>
       </ol>
       <div class="edu">
-        <span class="edu-label">Formação</span>
-        <div><b>Análise e Desenvolvimento de Sistemas</b><span>Graduação concluída em 2025</span></div>
+        <span class="edu-label" data-en="Education">Formação</span>
+        <div data-en="&lt;b&gt;Systems Analysis and Development&lt;/b&gt;&lt;span&gt;Undergraduate degree, completed in 2025&lt;/span&gt;"><b>Análise e Desenvolvimento de Sistemas</b><span>Graduação concluída em 2025</span></div>
       </div>
     </div>
   </section>
@@ -543,10 +600,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     <div class="wrap">
       <div class="sec-head"><h2>Stack</h2><span class="cmd">cat stack.conf</span></div>
       <dl class="skills">
-        <div><dt>banco de dados</dt><dd>Oracle SQL · PL/SQL · PostgreSQL</dd></div>
+        <div><dt data-en="databases">banco de dados</dt><dd>Oracle SQL · PL/SQL · PostgreSQL</dd></div>
         <div><dt>back-end</dt><dd>Node.js · TypeScript · Java · Python · PHP · Delphi · Progress 4GL</dd></div>
-        <div><dt>front, quando precisa</dt><dd>React · Next.js · HTML · CSS</dd></div>
-        <div><dt>integrações e IA</dt><dd>APIs REST · OCR · IA (Claude) · Microsoft Entra ID · Microsoft Graph</dd></div>
+        <div><dt data-en="front-end, when needed">front, quando precisa</dt><dd>React · Next.js · HTML · CSS</dd></div>
+        <div><dt data-en="integrations &amp;amp; AI">integrações e IA</dt><dd data-en="REST APIs · OCR · AI (Claude) · Microsoft Entra ID · Microsoft Graph">APIs REST · OCR · IA (Claude) · Microsoft Entra ID · Microsoft Graph</dd></div>
         <div><dt>infra</dt><dd>Docker</dd></div>
       </dl>
     </div>
@@ -554,12 +611,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
   <section id="contato">
     <div class="wrap">
-      <div class="sec-head"><h2>Contato</h2><span class="cmd">echo "vamos conversar"</span></div>
+      <div class="sec-head"><h2 data-en="Contact">Contato</h2><span class="cmd" data-en="echo &quot;let&#x27;s talk&quot;">echo "vamos conversar"</span></div>
       <div class="contact">
         <div>
           <span class="lbl">E-mail</span>
           <span class="val" id="email">felipebuenoborghesi@gmail.com</span>
-          <button class="copy" id="copy-email" type="button">copiar</button>
+          <button class="copy" id="copy-email" type="button" data-en="copy">copiar</button>
         </div>
         <div>
           <span class="lbl">GitHub</span>
@@ -572,8 +629,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
           <span></span>
         </div>
         <div>
-          <span class="lbl">Trabalho</span>
-          <span class="val plain">Remoto de qualquer lugar · híbrido ou presencial em Londrina, PR</span>
+          <span class="lbl" data-en="Work">Trabalho</span>
+          <span class="val plain" data-en="Remote from anywhere · hybrid or on-site in Londrina, PR">Remoto de qualquer lugar · híbrido ou presencial em Londrina, PR</span>
           <span></span>
         </div>
       </div>
@@ -582,23 +639,38 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 </main>
 
 <footer>
-  <div class="wrap"><span>© 2026 Felipe Borghesi</span><span>processo finalizado com código 0</span></div>
+  <div class="wrap"><span>© 2026 Felipe Borghesi</span><span data-en="process exited with code 0">processo finalizado com código 0</span></div>
 </footer>
 
 <script>
+/* ---------- tema claro/escuro ---------- */
+(function () {
+  var root = document.documentElement;
+  function apply(m) {
+    if (m === 'light') root.setAttribute('data-mode', 'light'); else root.removeAttribute('data-mode');
+    try { localStorage.setItem('mode', m); } catch (e) {}
+    window.dispatchEvent(new Event('themechange'));
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('mode'); } catch (e) {}
+  apply(saved === 'light' ? 'light' : 'dark');
+  document.getElementById('mode').addEventListener('click', function () {
+    apply(root.getAttribute('data-mode') === 'light' ? 'dark' : 'light');
+  });
+})();
 (function () {
   var btn = document.getElementById('copy-email');
   var el = document.getElementById('email');
   btn.addEventListener('click', function () {
     var text = el.textContent.trim();
-    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = 'copiar'; }, 1800); }
+    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = window.__lang === 'en' ? 'copy' : 'copiar'; }, 1800); }
     function fallback() {
       var r = document.createRange(); r.selectNodeContents(el);
       var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      done('selecionado');
+      done(window.__lang === 'en' ? 'selected' : 'selecionado');
     }
     try {
-      navigator.clipboard.writeText(text).then(function () { done('copiado'); }, fallback);
+      navigator.clipboard.writeText(text).then(function () { done(window.__lang === 'en' ? 'copied' : 'copiado'); }, fallback);
     } catch (e) { fallback(); }
   });
 })();
@@ -608,6 +680,15 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   var cv = document.getElementById('net');
   var ctx = cv.getContext('2d');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NA = '124,183,242', ND = '125,138,153', NH = '226,180,90';
+  function readColors() {
+    var cs = getComputedStyle(document.documentElement);
+    NA = cs.getPropertyValue('--net-a').trim() || NA;
+    ND = cs.getPropertyValue('--net-dot').trim() || ND;
+    NH = cs.getPropertyValue('--net-hot').trim() || NH;
+    if (reduce) draw();
+  }
+  window.addEventListener('themechange', readColors);
   var GAP = 36, W = 0, H = 0, cols = 0, rows = 0, dpr = 1;
   var mouse = { x: -9999, y: -9999 };
   var packets = [];
@@ -667,8 +748,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         var dist = Math.hypot(x - mouse.x, y - mouse.y);
         var near = Math.max(0, 1 - dist / 170);
         ctx.fillStyle = near > 0
-          ? 'rgba(124,183,242,' + (0.12 + near * 0.75).toFixed(3) + ')'
-          : 'rgba(125,138,153,0.16)';
+          ? 'rgba(' + NA + ',' + (0.12 + near * 0.75).toFixed(3) + ')'
+          : 'rgba(' + ND + ',0.2)';
         var r = 1 + near * 1.4;
         ctx.fillRect(x - r / 2, y - r / 2, r, r);
       }
@@ -681,7 +762,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
         var nx = (cx + ox) * GAP, ny = (cy + oy) * GAP;
         var dd = Math.hypot(nx - mouse.x, ny - mouse.y);
         if (dd < 120 && (ox + oy) % 2 === 0) {
-          ctx.strokeStyle = 'rgba(124,183,242,' + (0.28 * (1 - dd / 120)).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(' + NA + ',' + (0.28 * (1 - dd / 120)).toFixed(3) + ')';
           ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(nx, ny); ctx.stroke();
         }
       }
@@ -690,7 +771,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     for (var i = 0; i < packets.length; i++) {
       var p = packets[i], t = p.trail;
       if (t.length < 4) continue;
-      var col = p.hot ? '226,180,90' : '124,183,242';
+      var col = p.hot ? NH : NA;
       for (var k = 2; k < t.length; k += 2) {
         ctx.strokeStyle = 'rgba(' + col + ',' + (k / t.length * 0.55).toFixed(3) + ')';
         ctx.lineWidth = 1.5;
@@ -719,6 +800,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   });
 
   resize();
+  readColors();
   if (reduce) { draw(); } else { seed(); loop(); }
 })();
 
@@ -864,12 +946,25 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
     "Monster primeiro, deploy depois.",
     "Esse legado tem mais anos que meu teclado."
   ];
+  var LINES_EN = [
+    "SELECT * FROM coffee WHERE hot = 'Y';",
+    "Found a FULL TABLE SCAN. Be right back.",
+    "Deploy on a Friday? Better not.",
+    "Works on my machine. And in the container too.",
+    "The right index beats a new server.",
+    "git commit -m \"this time for sure\"",
+    "Monthly billing done. You can breathe now.",
+    "HTTP 200 OK",
+    "Monster first, deploy later.",
+    "This legacy code is older than my keyboard."
+  ];
+  function L() { return window.__lang === 'en' ? LINES_EN : LINES_PT; }
   var bubble = document.getElementById('bubble');
   var idx = -1, talkTimer = null;
   document.getElementById('avatar').addEventListener('click', function () {
-    var n; do { n = (Math.random() * LINES.length) | 0; } while (n === idx);
+    var n; do { n = (Math.random() * L().length) | 0; } while (n === idx);
     idx = n;
-    bubble.textContent = LINES[n];
+    bubble.textContent = L()[n];
     clearInterval(talkTimer);
     var open = false, ticks = 0;
     talkTimer = setInterval(function () {
@@ -940,12 +1035,42 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
       var last = document.getElementById('contato');
       if (h > 0 && y >= h - 4 && last.getBoundingClientRect().top < window.innerHeight * 0.5) cur = 'contato';
     }
-    cwd.textContent = cur ? '~/' + cur : '~';
+    var EN = { projetos: 'projects', trajetoria: 'career', stack: 'stack', contato: 'contact' };
+    cwd.textContent = cur ? '~/' + (window.__lang === 'en' ? EN[cur] : cur) : '~';
     links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-sec') === cur); });
   }
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
+  window.addEventListener('langchange', update);
   update();
+})();
+/* ---------- idioma ---------- */
+(function () {
+  var els = document.querySelectorAll('[data-en]');
+  els.forEach(function (el) { el.setAttribute('data-pt', el.innerHTML); });
+  var ATTRS = ['aria-label', 'alt'];
+  ATTRS.forEach(function (a) {
+    document.querySelectorAll('[data-en-' + a + ']').forEach(function (el) { el.setAttribute('data-pt-' + a, el.getAttribute(a)); });
+  });
+  var btns = document.querySelectorAll('.lang button');
+  function setLang(l) {
+    window.__lang = l;
+    document.documentElement.lang = l === 'en' ? 'en' : 'pt-BR';
+    els.forEach(function (el) { el.innerHTML = el.getAttribute(l === 'en' ? 'data-en' : 'data-pt'); });
+    ATTRS.forEach(function (a) {
+      document.querySelectorAll('[data-en-' + a + ']').forEach(function (el) {
+        el.setAttribute(a, el.getAttribute((l === 'en' ? 'data-en-' : 'data-pt-') + a));
+      });
+    });
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-lang') === l ? 'true' : 'false'); });
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    window.dispatchEvent(new Event('langchange'));
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); }); });
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  var nav = (navigator.languages && navigator.languages[0]) || navigator.language || 'pt';
+  setLang(saved || (/^pt/i.test(nav) ? 'pt' : 'en'));
 })();
 </script>
 </body>
